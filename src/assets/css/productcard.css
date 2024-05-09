@@ -1,0 +1,55 @@
+.product-top{
+    width: 20px;
+    height: 50px;
+    background-color: rgb(184, 43, 43);
+}
+
+.custom-background{
+    position: relative;
+    overflow: hidden;
+    background-color: rgb(241, 240, 240);
+}
+
+.custom{
+    position: absolute;
+    margin-left: 270px;
+    margin-top: 10px;
+}
+
+.custom-2{
+    width: 55px;
+    height: 30px;
+    
+    position: absolute;
+    color: white;
+    background-color: rgb(184, 43, 43);
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.add-to-cart {
+    position: absolute;
+    display: none;
+    bottom: 0; 
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8); 
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    transition: bottom 0.8s ease; 
+  }
+  
+  .custom-background:hover .add-to-cart {
+    display: block; 
+  }
+
+  .add-to-cart button {
+    border: none; 
+    background-color: transparent; 
+    cursor: pointer; 
+    padding: 0; 
+    color: white;
+  }
+  
+  
