@@ -7,10 +7,11 @@ import "../../assets/css/navbarpanel.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import wishlist from "../../assets/images/Wishlist.png";
 import cart from "../../assets/images/cart-icon.png";
+import { NavLink } from "react-router-dom";
 
 function Topbar() {
   return (
-    <Navbar collapseOnSelect expand="lg" className="border-bottom">
+    <Navbar collapseOnSelect expand="lg" className="border-bottom sticky-top bg-white">
       <Container>
         
         <Navbar.Brand className="navbar-brand font-weight-bold" href="#home">
@@ -20,12 +21,13 @@ function Topbar() {
         
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto ms-auto">
-            <Nav.Link className="menu" href="#features">
+            <Nav.Link  className="menu" href="/">
               Home
             </Nav.Link>
-            <Nav.Link className="mx-5 menu" href="#contact">Contact</Nav.Link>
-            <Nav.Link className="menu" href="#about">About</Nav.Link>
-            <Nav.Link className="mx-5 menu" href="#signup">Sign Up</Nav.Link>
+            
+            <Nav.Link className="mx-5 menu" href="/contact">Contact</Nav.Link>
+            <Nav.Link className="menu" href="/about">About</Nav.Link>
+            <Nav.Link className="mx-5 menu" href="/signup">Sign Up</Nav.Link>
           </Nav>
         
           <Form className="d-flex">

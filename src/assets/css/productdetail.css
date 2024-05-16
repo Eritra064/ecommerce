@@ -1,0 +1,28 @@
+.btn-group .button-style:hover{
+    background-color: rgb(184, 43, 43);
+    color: white;
+}
+
+.color-button1{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: none;
+    background-color: #A0BCE0;
+}
+
+.color-button2{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: none;
+    background-color: #E07575;
+}
+
+.selected {
+    border: 2px solid black;
+  }
+
+.not-selected{
+    border: 2px solid white;
+}

@@ -1,0 +1,25 @@
+.iconcss{
+    height: 80px;
+    width: 80px;
+    color: black;
+    
+}
+
+.icon{
+    width: 150px;
+    height: 150px;
+    padding-top: 20px;
+    border: solid 1px rgb(241, 240, 240);
+}
+
+.icon:hover{
+    background-color: brown;
+}
+
+.icon:hover .iconcss{
+    color: white;
+}
+
+.icon:hover .icon-text{
+    color: white;
+}
