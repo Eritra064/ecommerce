@@ -22,6 +22,10 @@ const routeList = [
     {
         url: "/signup",
         component: lazy(() => import('../components/SignUp/SignUp'))
+    },
+    {
+        url: "/login",
+        component: lazy(() => import('../components/Login/Login'))
     }
 
 ]

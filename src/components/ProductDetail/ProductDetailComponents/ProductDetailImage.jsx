@@ -1,14 +1,32 @@
 import { useState } from "react";
+import { FaArrowUp } from "react-icons/fa";
+import { FaArrowDown } from "react-icons/fa";
 
 const ProductDetailImage = ({product}) => {
     const [selectedImage, setSelectedImage] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState(1);
+
+    const handlePrev = () => {
+      const newIndex = currentIndex === 0 ? product.images.length - 1 : currentIndex - 1;
+      // setSelectedImage(product.images[newIndex].img);
+      setCurrentIndex(newIndex);
+  };
+
+  const handleNext = () => {
+      const newIndex = currentIndex === product.images.length - 1 ? 0 : currentIndex + 1;
+      // setSelectedImage(product.images[newIndex].img);
+      setCurrentIndex(newIndex);
+  };
+
+    
     const handleImageClick = (index) => {
         setSelectedImage(index);
       };
     return ( 
         <div style={{height: "36.375rem"}} className="d-flex flex-column flex-md-row col-12 col-md-8 gap-2">
           <div className="d-flex order-2 order-md-1 flex-row flex-md-column gap-2">
-            {product.images.slice(1).map((image, index) => (
+            <button className="" onClick={handlePrev}><FaArrowUp /></button>
+            {product.images.slice(currentIndex,currentIndex+4).map((image, index) => (
               <div
                 style={{
                   backgroundColor: "rgb(241, 240, 240)",
@@ -23,6 +41,7 @@ const ProductDetailImage = ({product}) => {
                 <img style={{height: "100%", width: "100%", objectFit: "contain"}} src={image} />
               </div>
             ))}
+            <button onClick={handleNext}><FaArrowDown /></button>
           </div>
           <div
             style={{ backgroundColor: "rgb(241, 240, 240)" }}

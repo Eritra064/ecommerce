@@ -18,7 +18,7 @@ const Products = [
         id: 1,
         name: "HAVIT HV-G92 Gamepad",
         price: "$120",
-        images: [gamepad_zero, gamepad_one, gamepad_two, gamepad_three, gamepad_four],
+        images: [gamepad_zero, gamepad_one, gamepad_two, gamepad_three, gamepad_four,gamepad_zero, gamepad_one, gamepad_two, gamepad_three, gamepad_four],
         sale: "-40%",
         category: "electronics"
     },
@@ -26,7 +26,7 @@ const Products = [
         id: 2,
         name: "AK-900 Wired Keyboard",
         price: "$960",
-        images: [keyboard, keyboard, keyboard, keyboard, keyboard],
+        images: [keyboard, keyboard, keyboard, keyboard, keyboard,keyboard, keyboard, keyboard, keyboard, keyboard],
         sale: "-35%",
         category: "electronics"
     },
@@ -34,7 +34,7 @@ const Products = [
         id: 3,
         name: "IPS LCD Gaming Monitor",
         price: "$370",
-        images: [monitor, monitor, monitor, monitor, monitor],
+        images: [monitor, monitor, monitor, monitor, monitor,monitor, monitor, monitor, monitor, monitor],
         sale: "-30%",
         category: "electronics"
     },
@@ -42,7 +42,7 @@ const Products = [
         id:4,
         name: "S-Series Comfort Chair",
         price: "$375",
-        images: [chair, chair, chair, chair, chair],
+        images: [chair, chair, chair, chair, chair, chair, chair, chair, chair, chair],
         sale: "-25%",
         category: "furniture"
     },
@@ -50,7 +50,7 @@ const Products = [
         id: 5,
         name: "HAVIT HV-G92 Gamepad",
         price: "$120",
-        images: [gamepad, gamepad, gamepad, gamepad, gamepad],
+        images: [gamepad, gamepad, gamepad, gamepad, gamepad, gamepad, gamepad, gamepad, gamepad, gamepad],
         sale: "-40%",
         category: "electronics"
     },
@@ -58,7 +58,7 @@ const Products = [
         id: 6,
         name: "AK-900 Wired Keyboard",
         price: "$960",
-        images: [keyboard, keyboard, keyboard, keyboard, keyboard],
+        images: [keyboard, keyboard, keyboard, keyboard, keyboard, keyboard, keyboard, keyboard, keyboard, keyboard],
         sale: "-35%",
         category: "electronics"
     },
@@ -66,7 +66,7 @@ const Products = [
         id: 7,
         name: "IPS LCD Gaming Monitor",
         price: "$370",
-        images: [monitor, monitor, monitor, monitor, monitor],
+        images: [monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor],
         sale: "-30%",
         category: "electronics"
     },
@@ -74,7 +74,7 @@ const Products = [
         id:8,
         name: "S-Series Comfort Chair",
         price: "$375",
-        images: [chair, chair, chair, chair, chair],
+        images: [chair, chair, chair, chair, chair, chair, chair, chair, chair, chair],
         sale: "-25%",
         category: "furniture"
     }
