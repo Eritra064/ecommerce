@@ -9,7 +9,8 @@ const initialState = {
     loginFormValue : {
         email: "",
         password: ""
-    }
+    },
+    isAuthenticated: false
 }
 
 const authSlice = createSlice({
@@ -26,9 +27,17 @@ const authSlice = createSlice({
 
         onChangeLoginReducer: (state, action) => {
             state.loginFormValue[action.payload.name] = action.payload.value
+        },
+
+        setLoginReducer: (state, action) => {
+            state.isAuthenticated = true;
+        },
+
+        logout: (state, action) => {
+            localStorage.removeItem('token');
         }
     }
 })
 
-export const {onChangeSignUpReducer, setSignUpReducer, onChangeLoginReducer} = authSlice.actions;
+export const {onChangeSignUpReducer, setSignUpReducer, onChangeLoginReducer, setLoginReducer, logout} = authSlice.actions;
 export default authSlice.reducer;

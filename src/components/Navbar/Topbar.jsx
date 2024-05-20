@@ -7,10 +7,31 @@ import "../../assets/css/navbarpanel.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import wishlist from "../../assets/images/Wishlist.png";
 import cart from "../../assets/images/cart-icon.png";
+import Dropdown from 'react-bootstrap/Dropdown';
+import user from "../../assets/images/user.png";
 import { NavLink } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { RxPerson } from "react-icons/rx";
+import { FiShoppingBag } from "react-icons/fi";
+import { MdOutlineCancel } from "react-icons/md";
+import { FaRegStar } from "react-icons/fa";
+import { TbLogout2 } from "react-icons/tb";
+import { logout } from "../../redux/state-slice/authSlice";
+import { useDispatch } from "react-redux";
+import store from "../../redux/store";
 
 
 function Topbar() {
+  
+  const storedToken = localStorage.getItem('token')
+  console.log(storedToken);
+
+  const handleLogout = () => {
+    store.dispatch(logout());
+    window.location.reload();
+  }
+  
+  
   return (
     <Navbar
       collapseOnSelect
@@ -35,9 +56,10 @@ function Topbar() {
             <Nav.Link className="menu" href="/about">
               About
             </Nav.Link>
-            <Nav.Link className="mx-5 menu" href="/signup">
+            {!storedToken && (<Nav.Link className="mx-5 menu" href="/signup">
               Sign Up
-            </Nav.Link>
+            </Nav.Link>)}
+            
           </Nav>
 
           <Form className="d-flex">
@@ -52,19 +74,22 @@ function Topbar() {
             <img src={wishlist} />
             <img src={cart} />
           </Nav>
-          <Nav>
-          <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">
-              Another action
-            </NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="#action/3.4">
-              Separated link
-            </NavDropdown.Item>
-          </NavDropdown>
-          </Nav>
+          {storedToken && (
+            <Dropdown>
+            <Dropdown.Toggle className="bg-white border-0 shadow-none">
+              <img src={user} />
+            </Dropdown.Toggle>
+      
+            <Dropdown.Menu>
+              <Dropdown.Item href="#/action-1"><RxPerson className="mr-2" />Manage My Account</Dropdown.Item>
+              <Dropdown.Item href="#/action-2"><FiShoppingBag className="mr-2"/>My Order</Dropdown.Item>
+              <Dropdown.Item href="#/action-3"><MdOutlineCancel className="mr-2"/>My Cancellations</Dropdown.Item>
+              <Dropdown.Item href="#/action-3"><FaRegStar className="mr-2"/>My Reviews</Dropdown.Item>
+              <Dropdown.Item href="#/action-3" onClick={handleLogout}><TbLogout2 className="mr-2" />Logout</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+          )}
+          
         </Navbar.Collapse>
       </Container>
     </Navbar>

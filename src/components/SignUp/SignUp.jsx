@@ -21,14 +21,14 @@ const SignUp = () => {
   };
 
   return (
-    <div className="d-flex justify-content-start align-items-center mt-5 mb-5">
-      <div style={{ width: "60%" }} className="">
+    <div className="d-flex justify-content-center align-items-center">
+      <div style={{ width: "55%" }} className="">
         <img
           style={{ width: "100%", height: "100%", objectFit: "contain" }}
           src={sideImage}
         />
       </div>
-      <div style={{ width: "40%", marginLeft: "40px" }} className="">
+      <div style={{ width: "45%" }} className="d-flex flex-column justify-content-start align-items-center">
         <h1 className="mb-5">Create an account</h1>
         <h5 className="mb-5">Enter your details below</h5>
         <form onSubmit={handleSubmit} className="d-flex flex-column gap-2">

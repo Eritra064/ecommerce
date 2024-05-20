@@ -1,7 +1,7 @@
 import sideImage from "../../assets/images/sideImage.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { onChangeLoginReducer } from "../../redux/state-slice/authSlice";
+import { onChangeLoginReducer, setLoginReducer } from "../../redux/state-slice/authSlice";
 import CustomModal from "../../helper/CustomModal";
 import store from "../../redux/store";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,15 +10,25 @@ const Login = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const loginFormValue = useSelector((state) => state.auth.loginFormValue);
+
+  const generateToken = () => {
+    return btoa(`${loginFormValue.email}:${loginFormValue.password}`);
+  };
+
+
   const handleLogin = (e) => {
     e.preventDefault();
     const storedUser = JSON.parse(localStorage.getItem('user'));
-
+    console.log(storedUser);
+    console.log(storedUser.email==loginFormValue.email)
     if(storedUser && storedUser.email==loginFormValue.email && storedUser.password==loginFormValue.password){
+
+      const token = generateToken();
+      // console.log(token);
+      localStorage.setItem('token', token);
+      
         setShowModal(true);
-        setTimeout(() => {
-            navigate('/'); 
-          }, 2000);
+        window.location.href = '/'
     }else{
         alert('Invalid email or password');
     }
@@ -30,14 +40,14 @@ const Login = () => {
   }
 
   return (
-    <div className="d-flex justify-content-start align-items-center mt-5 mb-5">
-      <div style={{ width: "60%" }} className="">
+    <div className="d-flex justify-content-start align-items-center">
+      <div style={{ width: "55%" }} className="">
         <img
           style={{ width: "100%", height: "100%", objectFit: "contain" }}
           src={sideImage}
         />
       </div>
-      <div style={{ width: "40%", marginLeft: "40px" }} className="">
+      <div style={{ width: "45%", marginLeft: "40px" }} className="d-flex flex-column justify-content-start align-items-center">
         <h1 className="mb-5">Log in to Exclusive</h1>
         <h5 className="mb-5">Enter your details below</h5>
         <form onSubmit={handleLogin} className="d-flex flex-column gap-2">
@@ -78,7 +88,7 @@ const Login = () => {
             Log In
           </button>
         </form>
-        <CustomModal show={showModal} handleClose={handleCloseModal} />
+        {/* <CustomModal show={showModal} handleClose={handleCloseModal} /> */}
       </div>
     </div>
   );

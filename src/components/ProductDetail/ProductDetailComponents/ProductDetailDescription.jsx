@@ -4,6 +4,8 @@ import { FaHeart } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 import returnIcon from "../../../assets/images/return.png";
 import delivery from "../../../assets/images/delivery.png";
+import Offcanvas from "react-bootstrap/Offcanvas";
+import ReviewCard from "../../../helper/ReviewCard";
 
 const ProductDetailDescription = ({ product }) => {
   const sizes = ["XS", "S", "M", "L", "XL"];
@@ -11,6 +13,7 @@ const ProductDetailDescription = ({ product }) => {
   const [size, setSize] = useState("M");
   const [quantity, setQuantity] = useState(1);
   const [toggleColor, setToggleColor] = useState(false);
+  const [show, setShow] = useState(false);
 
   const handleColorChange = (color) => {
     setSelectedColor(color);
@@ -35,8 +38,11 @@ const ProductDetailDescription = ({ product }) => {
   const handleToggleColor = () => {
     setToggleColor(!toggleColor);
   };
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
-    <div style={{height: "582px"}} className="col-12 col-md-4">
+    <div style={{ height: "582px" }} className="col-12 col-md-4">
       <h3 className="font-weight-bold">{product.name}</h3>
       <h4>{product.price}</h4>
       <div className="d-flex justify-content-start align-items-center gap-2">
@@ -54,14 +60,78 @@ const ProductDetailDescription = ({ product }) => {
             <FaStar style={{ color: "#FFAD33" }} />
           </p>
           <p>
-            <FaStar style={{ color: "#FFAD33" }} />
+            <FaStar style={{ color: "rgb(241, 240, 240)" }} />
           </p>
         </div>
-        <div>
-          <p className="border-end pr-2">(150 Reviews)</p>
+        <div className="d-flex justify-content-start align-items-start">
+          <p
+            style={{ cursor: "pointer" }}
+            onClick={handleShow}
+            className="border-0 border-end pr-2 bg-white"
+          >
+            (150 Reviews)
+          </p>
+          <Offcanvas
+            show={show}
+            onHide={handleClose}
+            placement={"end"}
+            style={{ width: "600px" }}
+          >
+            <Offcanvas.Header closeButton>
+              <Offcanvas.Title className="w-100">
+                <div className="border-1 rounded shadow p-3 d-flex justify-content-between align-items-center w-100">
+                  <h4>Reviews</h4>
+                  <div className="d-flex justify-content-center align-items-center gap-2">
+                    <p>
+                      <FaStar style={{ color: "#FFAD33" }} />
+                    </p>
+                    <p>
+                      <FaStar style={{ color: "#FFAD33" }} />
+                    </p>
+                    <p>
+                      <FaStar style={{ color: "#FFAD33" }} />
+                    </p>
+                    <p>
+                      <FaStar style={{ color: "#FFAD33" }} />
+                    </p>
+                    <p>
+                      <FaStar style={{ color: "rgb(241, 240, 240)" }} />
+                    </p>
+                    <p>4/5</p>
+                    <p>(150 Reviews)</p>
+                  </div>
+                </div>
+              </Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+              <div className="d-flex justify-content-center align-items-center gap-3">
+                <p>
+                  <FaStar style={{ color: "#FFAD33", fontSize: "30px" }} />
+                </p>
+                <p>
+                  <FaStar style={{ color: "#FFAD33", fontSize: "30px" }} />
+                </p>
+                <p>
+                  <FaStar style={{ color: "#FFAD33", fontSize: "30px" }} />
+                </p>
+                <p>
+                  <FaStar style={{ color: "#FFAD33", fontSize: "30px" }} />
+                </p>
+                <p>
+                  <FaStar style={{ color: "rgb(241, 240, 240)", fontSize: "30px" }} />
+                </p>
+                <p style={{fontSize: "30px"}}>4 Stars</p>
+              </div>
+              {product.reviews.map((review, index) => (
+                
+                <ReviewCard name={review.name} description={review.description} />
+              ))}
+              
+            </Offcanvas.Body>
+          </Offcanvas>
         </div>
         <div>
-          <p style={{color: "#00FF66"}}>In Stock</p>
+          <p style={{ color: "#00FF66" }}>In Stock</p>
         </div>
       </div>
       <p>
@@ -158,7 +228,7 @@ const ProductDetailDescription = ({ product }) => {
             type="button"
             style={{
               color: toggleColor ? "#E07575" : "#E5E5E5",
-              
+
               fontSize: "16px",
             }}
             onClick={() => handleToggleColor()}
@@ -189,5 +259,3 @@ const ProductDetailDescription = ({ product }) => {
 };
 
 export default ProductDetailDescription;
-
-
