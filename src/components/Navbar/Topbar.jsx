@@ -75,12 +75,12 @@ function Topbar() {
             <img src={cart} />
           </Nav>
           {storedToken && (
-            <Dropdown>
+            <Dropdown classname="">
             <Dropdown.Toggle className="bg-white border-0 shadow-none">
               <img src={user} />
             </Dropdown.Toggle>
       
-            <Dropdown.Menu>
+            <Dropdown.Menu classname="dropdown-background">
               <Dropdown.Item href="#/action-1"><RxPerson className="mr-2" />Manage My Account</Dropdown.Item>
               <Dropdown.Item href="#/action-2"><FiShoppingBag className="mr-2"/>My Order</Dropdown.Item>
               <Dropdown.Item href="#/action-3"><MdOutlineCancel className="mr-2"/>My Cancellations</Dropdown.Item>

@@ -1,4 +1,6 @@
 import Card from "react-bootstrap/Card";
+import { FaHeart } from "react-icons/fa";
+import { useState } from "react";
 const CustomCard = ({
   image,
   wishlistSrc,
@@ -8,17 +10,33 @@ const CustomCard = ({
   price,
   isDiscounted,
 }) => {
+  const [toggleColor, setToggleColor] = useState(false);
+  const handleToggleColor = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setToggleColor(!toggleColor);
+  };
+
   return (
     <Card className="border-0">
-      <div style={{height: "246px"}} className="custom-background p-5">
+      <div style={{ height: "246px" }} className="custom-background p-5">
         <Card.Img variant="top" src={image} />
         <div className="add-to-cart">
           <button>Add to cart</button>
         </div>
       </div>
       <div className="custom d-flex flex-column">
-        <button className="border-0">
-          <img src={wishlistSrc} />
+        <button
+          type="button"
+          style={{
+            
+            color: toggleColor ? "#E5E5E5" : "#E07575",
+            fontSize: "30px",
+          }}
+          onClick={() => handleToggleColor()}
+          className="border-0"
+        >
+          <FaHeart />
         </button>
         <button className="border-0">
           <img src={eyeSrc} />
