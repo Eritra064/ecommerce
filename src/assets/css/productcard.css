@@ -46,6 +46,7 @@
 
   .add-to-cart button {
     border: none; 
+    width: 100%;
     background-color: transparent; 
     cursor: pointer; 
     padding: 0; 

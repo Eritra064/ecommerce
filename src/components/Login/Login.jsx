@@ -96,4 +96,3 @@ const Login = () => {
 
 export default Login;
 
-//http://192.168.114.231:4001/back/swagger/index.html

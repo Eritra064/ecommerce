@@ -1,11 +1,4 @@
-/* .features{
-    color: brown;
-}
 
-.navbar-brand{
-    margin-right: 200px;
-    color: blue;
-} */
 .menu{
     font-weight: 500;
     color: black;
@@ -13,4 +6,11 @@
 
 .dropdown-background{
     background:rgba(0,0,0,0.6) !important;
+}
+
+.superscript{
+    background-color: red;
+    border-radius: 50%;
+    color: white;
+    padding: 2px 6px;
 }

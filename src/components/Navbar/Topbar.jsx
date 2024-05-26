@@ -19,10 +19,13 @@ import { TbLogout2 } from "react-icons/tb";
 import { logout } from "../../redux/state-slice/authSlice";
 import { useDispatch } from "react-redux";
 import store from "../../redux/store";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 
 function Topbar() {
-  
+  const cartList = useSelector((state) => state.product.cartList)
+  const wishList = useSelector((state) => state.product.wishList)
   const storedToken = localStorage.getItem('token')
   console.log(storedToken);
 
@@ -39,7 +42,7 @@ function Topbar() {
       className="border-bottom sticky-top bg-white"
     >
       <Container>
-        <Navbar.Brand className="navbar-brand font-weight-bold" href="#home">
+        <Navbar.Brand className="navbar-brand font-weight-bold" href="/">
           Exclusive
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -71,8 +74,9 @@ function Topbar() {
             />
           </Form>
           <Nav className="d-flex">
-            <img src={wishlist} />
-            <img src={cart} />
+            <Link style={{textDecoration: "none"}} to="/wishlist"><div><img src={wishlist} /><sup className="superscript">{wishList.length}</sup></div></Link>
+            
+            <Link style={{textDecoration: "none"}} to="/cart"><div><img src={cart} /><sup className="superscript">{cartList.length}</sup></div></Link>
           </Nav>
           {storedToken && (
             <Dropdown classname="">

@@ -255,6 +255,7 @@ const ProductDetailDescription = ({ product }) => {
         </div>
       </div>
     </div>
+    
   );
 };
 

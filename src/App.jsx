@@ -10,8 +10,9 @@ import { Suspense } from "react";
 function App() {
   return (
     <>
-      <Topbar />
+      
       <Router>
+      <Topbar />
         <Routes>
           {routeList.map((route, key) => (
             <Route path={route.url} element={

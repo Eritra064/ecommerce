@@ -9,7 +9,7 @@ import {
 } from "mdb-react-ui-kit";
 const Footer = () => {
   return (
-    <MDBFooter bgColor="dark" className="text-center text-lg-start text-white pt-5">
+    <MDBFooter bgColor="dark" className="text-center text-lg-start text-white pt-5 mb-0 bottom-0">
       <section className="">
         <MDBContainer className="text-center text-md-start mt-5">
           <MDBRow className="mt-3">

@@ -4,26 +4,33 @@ import { useState } from "react";
 import "../../../assets/css/productcard.css";
 import wishlist from "../../../assets/images/Wishlist.png";
 import eye from "../../../assets/images/eye.png";
+import { FaHeart } from "react-icons/fa";
 import Timer from "./Timer";
 import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import productSlice, { setProductList } from "../../../redux/state-slice/productSlice";
+import productSlice, {
+  setProductList,
+  setCartList,
+} from "../../../redux/state-slice/productSlice";
 import Products from "./Products";
 import CustomCard from "../../../helper/CustomCard";
 import ProductDetail from "../../ProductDetail/ProductDetail";
 import { Link } from "react-router-dom";
+import { FlashSaleListRequest } from "../../../APIRequest/FlashSale";
 
 const ProductCards = () => {
-  const products = useSelector(state => state.product.products);
-  
   const dispatch = useDispatch();
 
-  useEffect(()=>{
-    dispatch(setProductList(Products))
-  }, [])
-  
+  useEffect(() => {
+    (async () => {
+      await FlashSaleListRequest();
+    })();
+  }, []);
+
+  const products = useSelector((state) => state.product.products);
+
   const [showAllProducts, setShowAllProducts] = useState(false);
   const [startIndex, setStartIndex] = useState(0);
 
@@ -41,6 +48,9 @@ const ProductCards = () => {
     }
   };
 
+  const addToCart = (product) => {
+    dispatch(setCartList(product));
+  };
 
   return (
     <div className="row mt-5 mx-auto container mb-5">
@@ -60,25 +70,11 @@ const ProductCards = () => {
           </button>
         </div>
       </div>
-      {products.slice(startIndex, startIndex + 4).map((product) => (
-        
+      {products.slice(startIndex, startIndex + 4).map((product, index) => (
         <div key={product.id} className="col-3 mb-4">
-          <Link style={{ textDecoration: "none" }} state={{product:product}} to={`/product/${product.id}`}>
-          <CustomCard
-          image={product.images[0]}
-          wishlistSrc={wishlist}
-          eyeSrc={eye}
-          sale={product.sale}
-          name={product.name}
-          price={product.price}
-          isDiscounted
-          
-           />
-           </Link>
+          <CustomCard product={product} />
         </div>
       ))}
-
-      
     </div>
   );
 };

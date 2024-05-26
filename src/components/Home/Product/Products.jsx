@@ -12,7 +12,7 @@ const Products = [
     {
         id: 1,
         name: "HAVIT HV-G92 Gamepad",
-        price: "$120",
+        price: "120",
         images: [gamepad_zero, gamepad_one, gamepad_two, gamepad_three, gamepad_four,gamepad_zero, gamepad_one, gamepad_two, gamepad_three, gamepad_four],
         reviews: [
             {
@@ -34,7 +34,7 @@ const Products = [
     {
         id: 2,
         name: "AK-900 Wired Keyboard",
-        price: "$960",
+        price: "960",
         images: [keyboard, keyboard, keyboard, keyboard, keyboard,keyboard, keyboard, keyboard, keyboard, keyboard],
         reviews: [
             {
@@ -56,7 +56,7 @@ const Products = [
     {
         id: 3,
         name: "IPS LCD Gaming Monitor",
-        price: "$370",
+        price: "370",
         images: [monitor, monitor, monitor, monitor, monitor,monitor, monitor, monitor, monitor, monitor],
         reviews: [
             {
@@ -78,7 +78,7 @@ const Products = [
     {
         id:4,
         name: "S-Series Comfort Chair",
-        price: "$375",
+        price: "375",
         images: [chair, chair, chair, chair, chair, chair, chair, chair, chair, chair],
         reviews: [
             {
@@ -100,7 +100,7 @@ const Products = [
     {
         id: 5,
         name: "HAVIT HV-G92 Gamepad",
-        price: "$120",
+        price: "120",
         images: [gamepad, gamepad, gamepad, gamepad, gamepad, gamepad, gamepad, gamepad, gamepad, gamepad],
         reviews: [
             {
@@ -122,7 +122,7 @@ const Products = [
     {
         id: 6,
         name: "AK-900 Wired Keyboard",
-        price: "$960",
+        price: "960",
         images: [keyboard, keyboard, keyboard, keyboard, keyboard, keyboard, keyboard, keyboard, keyboard, keyboard],
         reviews: [
             {
@@ -144,7 +144,7 @@ const Products = [
     {
         id: 7,
         name: "IPS LCD Gaming Monitor",
-        price: "$370",
+        price: "370",
         images: [monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor],
         reviews: [
             {
@@ -166,7 +166,7 @@ const Products = [
     {
         id:8,
         name: "S-Series Comfort Chair",
-        price: "$375",
+        price: "375",
         images: [chair, chair, chair, chair, chair, chair, chair, chair, chair, chair],
         reviews: [
             {

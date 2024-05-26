@@ -1,56 +1,63 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 import "../../../assets/css/categories.css";
-
+import { useSelector } from "react-redux";
 import { FiCamera } from "react-icons/fi";
 import { IoIosPhonePortrait } from "react-icons/io";
 import { RiComputerLine } from "react-icons/ri";
 import { BsSmartwatch } from "react-icons/bs";
 import { MdOutlineHeadphones } from "react-icons/md";
 import { SiFacebookgaming } from "react-icons/si";
+import { CategoryListRequest } from "../../../APIRequest/Category";
 
 const Categories = () => {
-    const icons = [
-        
-        {
-            icon: IoIosPhonePortrait,
-            text: "SmartPhone"
-        },
-        {
-            icon: RiComputerLine,
-            text: "Computer"
-        },
-        {
-            icon: BsSmartwatch,
-            text: "Smart Watch"
-        },
-        {
-            icon: FiCamera,
-            text: "Camera"
-        },
-        {
-            icon: MdOutlineHeadphones,
-            text: "HeadPhones"
-        },
-        {
-            icon: SiFacebookgaming,
-            text: "Gaming"
-        },
-        {
-          icon: FiCamera,
-          text: "Camera"
-      },
-      {
-          icon: MdOutlineHeadphones,
-          text: "HeadPhones"
-      },
-      {
-          icon: SiFacebookgaming,
-          text: "Gaming"
-      },
-        
-    ]
+  useEffect(() => {
+    (async () => {
+      await CategoryListRequest();
+    })();
+  }, []);
+
+  const categories = useSelector((state) => state.category.categories)
+
+  const icons = [
+    {
+      icon: IoIosPhonePortrait,
+      text: "SmartPhone",
+    },
+    {
+      icon: RiComputerLine,
+      text: "Computer",
+    },
+    {
+      icon: BsSmartwatch,
+      text: "Smart Watch",
+    },
+    {
+      icon: FiCamera,
+      text: "Camera",
+    },
+    {
+      icon: MdOutlineHeadphones,
+      text: "HeadPhones",
+    },
+    {
+      icon: SiFacebookgaming,
+      text: "Gaming",
+    },
+    {
+      icon: FiCamera,
+      text: "Camera",
+    },
+    {
+      icon: MdOutlineHeadphones,
+      text: "HeadPhones",
+    },
+    {
+      icon: SiFacebookgaming,
+      text: "Gaming",
+    },
+  ];
   const [startIndex, setStartIndex] = useState(0);
 
   const handleNext = () => {
@@ -85,13 +92,15 @@ const Categories = () => {
       </div>
       {/*categories*/}
       <div className="d-flex justify-content-between">
-      {icons.slice(startIndex, startIndex + 6).map(({ icon: Icon, text }) => (
-            <div className="d-flex icon flex-column align-items-center rounded">
-              <Icon className="iconcss mb-3" />
-              <p className="icon-text">{text}</p>
-            </div>
+        {/* {icons.slice(startIndex, startIndex + 6).map(({ icon: Icon, text }) => (
+          <div className="d-flex icon flex-column align-items-center rounded">
+            <Icon className="iconcss mb-3" />
+            <p className="icon-text">{text}</p>
+          </div>
+        ))} */}
+        {categories.map((category) => (
+          <p>{category.CategoryName}</p>
         ))}
-      
       </div>
     </div>
   );

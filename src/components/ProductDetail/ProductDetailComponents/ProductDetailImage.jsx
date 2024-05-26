@@ -36,9 +36,7 @@ const ProductDetailImage = ({ product }) => {
         >
           <FaArrowUp />
         </button>
-        {product.images
-          .slice(currentIndex, currentIndex + 4)
-          .map((image, index) => (
+        {product.ImagesList.map((image, index) => (
             <div
               style={{
                 backgroundColor: "rgb(241, 240, 240)",
@@ -52,7 +50,7 @@ const ProductDetailImage = ({ product }) => {
             >
               <img
                 style={{ height: "100%", width: "100%", objectFit: "contain" }}
-                src={image}
+                src={image.ImageURL}
               />
             </div>
           ))}

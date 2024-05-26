@@ -1,0 +1,12 @@
+.cartlist{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding-top: 24px;
+    padding-bottom: 15px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.quantity-button{
+    width: 70px;
+    padding: 5px;
+}
