@@ -74,9 +74,13 @@ function Topbar() {
             />
           </Form>
           <Nav className="d-flex">
-            <Link style={{textDecoration: "none"}} to="/wishlist"><div><img src={wishlist} /><sup className="superscript">{wishList.length}</sup></div></Link>
+            <Link style={{textDecoration: "none"}} to="/wishlist"><div><img src={wishlist} />
+            {wishList.length>0 && <sup className="superscript">{wishList.length}</sup> }</div>
+            </Link>
             
-            <Link style={{textDecoration: "none"}} to="/cart"><div><img src={cart} /><sup className="superscript">{cartList.length}</sup></div></Link>
+            <Link style={{textDecoration: "none"}} to="/cart"><div><img src={cart} />
+            {cartList.length>0 && <sup className="superscript">{cartList.length}</sup>}</div>
+            </Link>
           </Nav>
           {storedToken && (
             <Dropdown classname="">

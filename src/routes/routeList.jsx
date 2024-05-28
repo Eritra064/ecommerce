@@ -8,7 +8,7 @@ const routeList = [
         component: lazy(() => import('../components/Home/Home'))
     },
     {
-        url: "/product/:id",
+        url: "/product/:productId",
         component: lazy(() => import('../components/ProductDetail/ProductDetail'))
     },
     {
@@ -34,6 +34,10 @@ const routeList = [
     {
         url: "/wishlist",
         component: lazy(() => import('../components/WishList/WishList'))
+    },
+    {
+        url: "/category/:categoryId",
+        component: lazy(() => import('../components/Category/CategoryProducts'))
     }
 
 ]

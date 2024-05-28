@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../../../assets/css/productdetail.css";
 import { FaHeart } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
@@ -9,11 +9,23 @@ import ReviewCard from "../../../helper/ReviewCard";
 
 const ProductDetailDescription = ({ product }) => {
   const sizes = ["XS", "S", "M", "L", "XL"];
-  const [selectedColor, setSelectedColor] = useState("#A0BCE0");
-  const [size, setSize] = useState("M");
+  const initialColor = product?.ColorList?.find(color => color.IsSelected)?.ColorCode;
+  console.log(product);
+  const [selectedColor, setSelectedColor] = useState(initialColor);
+  const [size, setSize] = useState(product?.Size);
   const [quantity, setQuantity] = useState(1);
   const [toggleColor, setToggleColor] = useState(false);
   const [show, setShow] = useState(false);
+
+ 
+  useEffect(() => {
+    if (initialColor) {
+      setSelectedColor(initialColor);
+    }
+    if (product?.Size) {
+      setSize(product.Size);
+    }
+  }, [initialColor, product?.Size]);
 
   const handleColorChange = (color) => {
     setSelectedColor(color);
@@ -43,8 +55,8 @@ const ProductDetailDescription = ({ product }) => {
   const handleShow = () => setShow(true);
   return (
     <div style={{ height: "582px" }} className="col-12 col-md-4">
-      <h3 className="font-weight-bold">{product.name}</h3>
-      <h4>{product.price}</h4>
+      <h3 className="font-weight-bold">{product?.Title}</h3>
+      <h4>${product?.Price}</h4>
       <div className="d-flex justify-content-start align-items-center gap-2">
         <div className="d-flex">
           <p>
@@ -69,9 +81,9 @@ const ProductDetailDescription = ({ product }) => {
             onClick={handleShow}
             className="border-0 border-end pr-2 bg-white"
           >
-            (150 Reviews)
+            {product?.ReviewCount} Reviews
           </p>
-          <Offcanvas
+          {product.ReviewCount>0 && <Offcanvas
             show={show}
             onHide={handleClose}
             placement={"end"}
@@ -97,7 +109,7 @@ const ProductDetailDescription = ({ product }) => {
                     <p>
                       <FaStar style={{ color: "rgb(241, 240, 240)" }} />
                     </p>
-                    <p>4/5</p>
+                    <p>{product?.AvgRating}/5</p>
                     <p>(150 Reviews)</p>
                   </div>
                 </div>
@@ -122,22 +134,21 @@ const ProductDetailDescription = ({ product }) => {
                 </p>
                 <p style={{fontSize: "30px"}}>4 Stars</p>
               </div>
-              {product.reviews.map((review, index) => (
+              {product?.ReviewList?.map((review, index) => (
                 
-                <ReviewCard name={review.name} description={review.description} />
+                <ReviewCard name={review?.UserName} description={review?.Comment} />
               ))}
               
             </Offcanvas.Body>
-          </Offcanvas>
+          </Offcanvas>}
+          
         </div>
         <div>
           <p style={{ color: "#00FF66" }}>In Stock</p>
         </div>
       </div>
       <p>
-        PlayStation 5 Controller Skin High quality vinyl with air channel
-        adhesive for easy bubble free install & mess free removal Pressure
-        sensitive.
+        {product?.Description}
       </p>
       <hr></hr>
       <form className="d-flex flex-column gap-1">
@@ -147,24 +158,15 @@ const ProductDetailDescription = ({ product }) => {
             <p style={{ fontSize: "20px" }}>Colors:</p>
           </div>
           <div className="">
-            <button
-              onClick={() => {
-                handleColorChange("#A0BCE0");
-              }}
-              type="button"
-              className={`color-button1 ${
-                selectedColor === "#A0BCE0" ? "selected" : "not-selected"
-              }`}
-            ></button>
-            <button
-              onClick={() => {
-                handleColorChange("#E07575");
-              }}
-              type="button"
-              className={`color-button2 ${
-                selectedColor === "#E07575" ? "selected" : "not-selected"
-              }`}
-            ></button>
+            {product?.ColorList?.map(color => (
+              <button
+                key={color.ColorID}
+                onClick={() => handleColorChange(color.ColorCode)}
+                type="button"
+                className={`color-button ${selectedColor === color.ColorCode ? "selected" : "not-selected"}`}
+                style={{ backgroundColor: color.ColorCode, }}
+              ></button>
+            ))}
           </div>
         </div>
 

@@ -5,7 +5,7 @@ import "../../../assets/css/productcard.css";
 import wishlist from "../../../assets/images/Wishlist.png";
 import eye from "../../../assets/images/eye.png";
 import { FaHeart } from "react-icons/fa";
-import Timer from "./Timer";
+import Timer from "../../../helper/Timer";
 import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 import { useSelector } from "react-redux";
@@ -14,18 +14,18 @@ import productSlice, {
   setProductList,
   setCartList,
 } from "../../../redux/state-slice/productSlice";
-import Products from "./Products";
 import CustomCard from "../../../helper/CustomCard";
-import ProductDetail from "../../ProductDetail/ProductDetail";
-import { Link } from "react-router-dom";
-import { FlashSaleListRequest } from "../../../APIRequest/FlashSale";
+import store from "../../../redux/store";
+import { productRequest } from "../../../APIRequest/Products";
 
-const ProductCards = () => {
+const FlashSale = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     (async () => {
-      await FlashSaleListRequest();
+      // await FlashSaleListRequest();
+      const data = await productRequest(7);
+      store.dispatch(setProductList(data));
     })();
   }, []);
 
@@ -79,4 +79,4 @@ const ProductCards = () => {
   );
 };
 
-export default ProductCards;
+export default FlashSale;

@@ -3,8 +3,10 @@ import { FaArrowUp } from "react-icons/fa";
 import { FaArrowDown } from "react-icons/fa";
 
 const ProductDetailImage = ({ product }) => {
+  console.log(product)
   const [selectedImage, setSelectedImage] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const URL = "http://192.168.114.231:4001/"
 
   const handlePrev = () => {
     const newIndex = currentIndex === 0 ? 0 : currentIndex - 1;
@@ -14,7 +16,7 @@ const ProductDetailImage = ({ product }) => {
 
   const handleNext = () => {
     const newIndex =
-      currentIndex === product.images.length - 1 ? 0 : currentIndex + 1;
+      currentIndex === product?.ImagesList?.length - 1 ? 0 : currentIndex + 1;
 
     setCurrentIndex(newIndex);
   };
@@ -28,20 +30,23 @@ const ProductDetailImage = ({ product }) => {
       style={{ height: "36.375rem" }}
       className="d-flex flex-column flex-md-row col-12 col-md-8 gap-2"
     >
-      <div className="d-flex justify-content-center align-items-center order-2 order-md-1 flex-row flex-md-column gap-2 position-relative">
-        <button
+      <div className="d-flex justify-content-start align-items-center order-2 order-md-1 flex-row flex-md-column gap-2 position-relative">
+        {product?.ImagesList?.length>4 && <button
           style={{ width: "100%", outline: "none", backgroundColor: "transparent" }}
           className="position-absolute top-0 border-0"
           onClick={handlePrev}
         >
           <FaArrowUp />
-        </button>
-        {product.ImagesList.map((image, index) => (
+        </button>}
+        
+        {product?.ImagesList?.map((image, index) => (
             <div
+            key={image.ImageID}
               style={{
-                backgroundColor: "rgb(241, 240, 240)",
+                border: "5px solid rgb(241, 240, 240)",
                 cursor: "pointer",
                 height: "8.75rem",
+                width: "8.75rem"
               }}
               onClick={() => {
                 handleImageClick(currentIndex + index);
@@ -50,26 +55,27 @@ const ProductDetailImage = ({ product }) => {
             >
               <img
                 style={{ height: "100%", width: "100%", objectFit: "contain" }}
-                src={image.ImageURL}
+                src={URL+image.ImageURL}
               />
             </div>
           ))}
-
-        <button
+        {product.ImagesList?.length>4 && <button
           style={{ width: "100%", outline: "none", backgroundColor: "transparent" }}
           className="position-absolute bottom-0 border-0"
           onClick={handleNext}
         >
           <FaArrowDown />
-        </button>
+        </button>}
+        
       </div>
       <div
-        style={{ backgroundColor: "rgb(241, 240, 240)" }}
+        // style={{ backgroundColor: "rgb(241, 240, 240)" }}
+        style={{border: "5px solid rgb(241, 240, 240)"}}
         className="d-flex justify-content-center align-items-center order-1 order-md-2 p-5"
       >
         <img
           style={{ width: "100%", height: "100%", objectFit: "contain" }}
-          src={product.images[selectedImage]}
+          src={URL+product?.ImagesList?.[selectedImage]?.ImageURL}
           className=""
         />
       </div>

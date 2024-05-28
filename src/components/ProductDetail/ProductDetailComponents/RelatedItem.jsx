@@ -1,47 +1,44 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { setProductList } from "../../../redux/state-slice/productSlice";
-import Products from "../../Home/Product/Products";
 import CustomCard from "../../../helper/CustomCard";
-import { Link } from "react-router-dom";
-import wishlist from "../../../assets/images/Wishlist.png";
-import eye from "../../../assets/images/eye.png"
+import { relatedItemRequest } from "../../../APIRequest/RelatedItem";
 
-const RelatedItem = ({product}) => {
+const RelatedItem = ({ product }) => {
   const [startIndex, setStartIndex] = useState(0);
-  const dispatch = useDispatch();
+  console.log(product);
+
+  const categoryId = product?.CategoryID;
+
+  console.log("category id is:", categoryId);
 
   useEffect(() => {
-    dispatch(setProductList(Products));
-  }, []);
-  const products = useSelector((state) => state.product.products);
-  const relatedProducts = products.filter((item)=>item.category===product.category);
+    (async () => {
+      await relatedItemRequest(categoryId);
+    })();
+  }, [categoryId]);
+
+
+  const products = useSelector((state) => state.product.relatedItems)
+
+  console.log("products are:",products)
+
+  const relatedProducts = products.filter(
+    (item) => item.Title != product.Title
+  );
   console.log(relatedProducts);
   return (
-    <div style={{marginTop: "150px"}}>
-        <div className="d-flex align-items-center mb-3">
+    <div style={{ marginTop: "150px" }}>
+      <div className="d-flex align-items-center mb-3">
         <div className="product-top rounded mr-3"></div>
         <p className="text-danger font-weight-bold">Related Items</p>
       </div>
-    <div className="d-flex align-items-center">
+      <div className="d-flex align-items-center">
         {relatedProducts.slice(startIndex, startIndex + 4).map((product) => (
-        
-        <div key={product.id} className="col-3 mb-4">
-          <Link style={{ textDecoration: "none" }} state={{product:product}} to={`/product/${product.id}`}>
-          <CustomCard
-          image={product.images[0]}
-          wishlistSrc={wishlist}
-          eyeSrc={eye}
-          sale={product.sale}
-          name={product.name}
-          price={product.price}
-          isDiscounted
-          
-           />
-           </Link>
-        </div>
-      ))}
-    </div>
+          <div key={product.id} className="col-3 mb-4">
+            <CustomCard product={product} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

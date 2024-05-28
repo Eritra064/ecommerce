@@ -3,21 +3,14 @@
     color: white;
 }
 
-.color-button1{
+.color-button{
     width: 20px;
     height: 20px;
     border-radius: 50%;
     border: none;
-    background-color: #A0BCE0;
+    
 }
 
-.color-button2{
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: none;
-    background-color: #E07575;
-}
 
 .selected {
     border: 2px solid black;

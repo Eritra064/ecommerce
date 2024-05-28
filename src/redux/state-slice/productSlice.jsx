@@ -1,12 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
 const initialState = {
   products: [],
   productDetails: {
     
   },
   cartList: [],
-  wishList: []
+  wishList: [],
+  relatedItems: [],
+  categoryProducts: []
 };
 
 const productSlice = createSlice({
@@ -27,10 +30,19 @@ const productSlice = createSlice({
 
     setProductDetails: (state, action) => {
       state.productDetails = action.payload;
+    },
+    removeFromWishList: (state, action) => {
+      state.wishList = state.wishList.filter(item => item.ProductID !== action.payload);
+    },
+    setRelatedItems: (state, action) => {
+      state.relatedItems = action.payload;
+    },
+    setCategoryProduct: (state, action) => {
+      state.categoryProducts = action.payload;
     }
    
   },
 });
 
-export const { setProductList, setCartList, setWishList, setProductDetails } = productSlice.actions;
+export const { setProductList, setCartList, setWishList, setProductDetails, setRelatedItems, setCategoryProduct } = productSlice.actions;
 export default productSlice.reducer;

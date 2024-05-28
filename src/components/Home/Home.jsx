@@ -1,4 +1,4 @@
-import ProductCards from "./Product/ProductCards";
+import FlashSale from "./FlashSale/FlashSale";
 import Hero from "./Hero/Hero";
 import Categories from "./Categories/Categories";
 import Featured from "../../components/Home/Featured/Featured";
@@ -8,7 +8,7 @@ const Home = () => {
     return ( 
         <div>
             <Hero />
-            <ProductCards />
+            <FlashSale />
             <Categories />
             <BestSelling />
             <Featured />

@@ -10,6 +10,7 @@ import { BsSmartwatch } from "react-icons/bs";
 import { MdOutlineHeadphones } from "react-icons/md";
 import { SiFacebookgaming } from "react-icons/si";
 import { CategoryListRequest } from "../../../APIRequest/Category";
+import { Link } from "react-router-dom";
 
 const Categories = () => {
   useEffect(() => {
@@ -18,20 +19,20 @@ const Categories = () => {
     })();
   }, []);
 
-  const categories = useSelector((state) => state.category.categories)
+  const categories = useSelector((state) => state.category.categories);
 
   const icons = [
     {
       icon: IoIosPhonePortrait,
-      text: "SmartPhone",
+      text: "Phones",
     },
     {
       icon: RiComputerLine,
-      text: "Computer",
+      text: "Computers",
     },
     {
       icon: BsSmartwatch,
-      text: "Smart Watch",
+      text: "SmartWatch",
     },
     {
       icon: FiCamera,
@@ -39,30 +40,24 @@ const Categories = () => {
     },
     {
       icon: MdOutlineHeadphones,
-      text: "HeadPhones",
-    },
-    {
-      icon: SiFacebookgaming,
-      text: "Gaming",
-    },
-    {
-      icon: FiCamera,
-      text: "Camera",
-    },
-    {
-      icon: MdOutlineHeadphones,
-      text: "HeadPhones",
+      text: "Headphones",
     },
     {
       icon: SiFacebookgaming,
       text: "Gaming",
     },
   ];
+
+  const findIcon = (categoryName) => {
+    const match = icons.find((iconObj) => iconObj.text === categoryName);
+    return match ? match.icon : null;
+  };
+
   const [startIndex, setStartIndex] = useState(0);
 
   const handleNext = () => {
     const nextIndex = startIndex + 1;
-    if (nextIndex <= icons.length - 6) {
+    if (nextIndex <= categories.length - 6) {
       setStartIndex(nextIndex);
     }
   };
@@ -92,15 +87,23 @@ const Categories = () => {
       </div>
       {/*categories*/}
       <div className="d-flex justify-content-between">
-        {/* {icons.slice(startIndex, startIndex + 6).map(({ icon: Icon, text }) => (
-          <div className="d-flex icon flex-column align-items-center rounded">
-            <Icon className="iconcss mb-3" />
-            <p className="icon-text">{text}</p>
-          </div>
-        ))} */}
-        {categories.map((category) => (
-          <p>{category.CategoryName}</p>
-        ))}
+        {categories.slice(startIndex, startIndex + 6).map((category) => {
+          const IconComponent = findIcon(category?.CategoryName);
+          return (
+            <Link
+              style={{ textDecoration: "none", color: "black" }}
+              to={`/category/${category?.CategoryID}`}
+            >
+              <div
+                className="d-flex icon flex-column align-items-center rounded"
+                key={category?.CategoryName}
+              >
+                {IconComponent && <IconComponent className="iconcss mb-3" />}
+                <p className="icon-text">{category?.CategoryName}</p>
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

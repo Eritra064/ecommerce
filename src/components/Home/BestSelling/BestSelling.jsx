@@ -1,24 +1,25 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import Card from "react-bootstrap/Card";
-import wishlist from "../../../assets/images/Wishlist.png";
-import eye from "../../../assets/images/eye.png";
-import BestSellingProducts from "./BestSellingProducts";
-import { setBestSelling } from "../../../redux/state-slice/bestSellingSlice";
 import CustomCard from "../../../helper/CustomCard";
+import { productRequest } from "../../../APIRequest/Products";
+import { setBestSelling } from "../../../redux/state-slice/bestSellingSlice";
+import store from "../../../redux/store";
 
 const BestSelling = () => {
+  
+  useEffect(() => {
+    (async () => {
+      const data = await productRequest(8);
+      store.dispatch(setBestSelling(data));
+    })();
+  }, [8]);
+
   const bestSellingProducts = useSelector(
     (state) => state.bestSelling.bestSellingProducts
   );
-  const dispatch = useDispatch();
 
   const [showAllProducts, setShowAllProducts] = useState(false);
   const [startIndex, setStartIndex] = useState(0);
-
-  useEffect(() => {
-    dispatch(setBestSelling(BestSellingProducts));
-  }, []);
 
   return (
     <div className="row mt-5 mx-auto container mb-5">
@@ -46,28 +47,14 @@ const BestSelling = () => {
       {showAllProducts
         ? bestSellingProducts.map((product) => (
             <div key={product.id} className="col-3 mb-4">
-              <CustomCard
-                image={product.image}
-                wishlistSrc={wishlist}
-                eyeSrc={eye}
-                sale={product.sale}
-                name={product.name}
-                price={product.price}
-              />
+              <CustomCard product={product} />
             </div>
           ))
         : bestSellingProducts
             .slice(startIndex, startIndex + 4)
             .map((product) => (
               <div key={product.id} className="col-3 mb-4">
-                <CustomCard
-                  image={product.image}
-                  wishlistSrc={wishlist}
-                  eyeSrc={eye}
-                  sale={product.sale}
-                  name={product.name}
-                  price={product.price}
-                />
+                <CustomCard product={product} />
               </div>
             ))}
     </div>

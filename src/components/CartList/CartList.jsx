@@ -6,6 +6,8 @@ import { useState } from "react";
 
 const CartList = () => {
   const cartList = useSelector((state) => state.product.cartList);
+  console.log(cartList);
+  const URL = "http://192.168.114.231:4001/"
 
   const initialQuantities = cartList.reduce((acc, product) => {
     acc[product.id] = 1; 
@@ -49,14 +51,14 @@ const CartList = () => {
           <div key={product.id} className="d-flex justify-content-center align-items-center cartlist p-3">
             <div className="w-25 d-flex justify-content-center align-items-center gap-2">
               <div className="d-flex justify-content-center align-items-center">
-                <img style={{ width: "40px" }} src={product.images[0]} />
+                <img style={{ width: "40px" }} src={URL+product?.ImageURL} />
               </div>
               <div className="d-flex justify-content-center align-items-center">
-                <p>{product.name}</p>
+                <p>{product?.Title}</p>
               </div>
             </div>
             <div className="w-25 d-flex justify-content-center align-items-center">
-              <p>{product.price}</p>
+              <p>{product?.Price}</p>
             </div>
             <div className="w-25 d-flex justify-content-center align-items-center">
               <div className="d-flex border rounded justify-content-center align-items-center">
@@ -72,7 +74,7 @@ const CartList = () => {
               </div>
             </div>
             <div className="w-25 d-flex justify-content-center align-items-center">
-              <p>{(parseFloat(product.price) * quantities[product.id])}</p>
+              <p>{(parseFloat(product?.Price) * quantities[product.id])}</p>
             </div>
           </div>
         ))}
