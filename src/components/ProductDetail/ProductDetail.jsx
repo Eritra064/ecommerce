@@ -16,9 +16,11 @@ useEffect(() => {
     (async () => {
         await ProductDetailRequest(productId);
     })();
-}, []);
+}, [productId]);
 
 const product = useSelector((state) => state.product.productDetails)
+
+
 
 //   const { product } = location.state;
     return ( 
@@ -27,7 +29,7 @@ const product = useSelector((state) => state.product.productDetails)
             <div className="d-flex gap-2 ml-3">
                 <Link style={{textDecoration: "none", color: "black"}} to="/"><p>Home</p></Link>
                 <p>/</p>
-                <p>{product.Tags}</p>
+                <Link style={{textDecoration: "none", color: "black"}} to={`/category/${product?.CategoryID}`}><p>{product.Tags}</p></Link>
                 <p>/</p>
                 <p className="font-weight-bold">{product.Title}</p>
             </div>

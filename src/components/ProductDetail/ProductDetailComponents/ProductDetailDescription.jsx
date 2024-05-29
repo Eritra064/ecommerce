@@ -147,9 +147,10 @@ const ProductDetailDescription = ({ product }) => {
           <p style={{ color: "#00FF66" }}>In Stock</p>
         </div>
       </div>
-      <p>
-        {product?.Description}
-      </p>
+      <div>
+        <p>{product?.Description}</p>
+        <button>View More</button>
+      </div>
       <hr></hr>
       <form className="d-flex flex-column gap-1">
         {/*colors*/}

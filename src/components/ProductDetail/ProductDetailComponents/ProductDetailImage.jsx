@@ -28,9 +28,9 @@ const ProductDetailImage = ({ product }) => {
   return (
     <div
       style={{ height: "36.375rem" }}
-      className="d-flex flex-column flex-md-row col-12 col-md-8 gap-2"
+      className="d-flex flex-column flex-md-row col-12 col-md-8 gap-5"
     >
-      <div className="d-flex justify-content-start align-items-center order-2 order-md-1 flex-row flex-md-column gap-2 position-relative">
+      <div className="d-flex justify-content-start align-items-center order-2 order-md-1 flex-row flex-md-column gap-2 position-relative col-md-2">
         {product?.ImagesList?.length>4 && <button
           style={{ width: "100%", outline: "none", backgroundColor: "transparent" }}
           className="position-absolute top-0 border-0"
@@ -71,7 +71,7 @@ const ProductDetailImage = ({ product }) => {
       <div
         // style={{ backgroundColor: "rgb(241, 240, 240)" }}
         style={{border: "5px solid rgb(241, 240, 240)"}}
-        className="d-flex justify-content-center align-items-center order-1 order-md-2 p-5"
+        className="d-flex justify-content-center align-items-center col-md-9 order-1 order-md-2 p-5"
       >
         <img
           style={{ width: "100%", height: "100%", objectFit: "contain" }}

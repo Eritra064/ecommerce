@@ -3,21 +3,40 @@ import { FaHeart } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { setCartList, setWishList } from "../redux/state-slice/productSlice";
-import { useDispatch } from "react-redux";
+import { setCartList, setWishList, removeFromWishList  } from "../redux/state-slice/productSlice";
+import { useDispatch, useSelector } from "react-redux";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import Swal from "sweetalert2";
 const CustomCard = ({ product, remove }) => {
   const URL = "http://192.168.114.231:4001/" + product?.ImageURL;
   const dispatch = useDispatch();
+  const cartList = useSelector((state) => state.product.cartList)
   const [toggleColor, setToggleColor] = useState(false);
   const handleToggleColor = (product) => {
+    if (toggleColor) {
+      dispatch(removeFromWishList(product?.ProductID));
+    } else {
+      dispatch(setWishList(product));
+    }
     setToggleColor(!toggleColor);
-    dispatch(setWishList(product));
   };
 
   const addToCart = (product) => {
-    dispatch(setCartList(product));
+    const isInCart = cartList.some((item) => item.ProductID === product?.ProductID);
+    if (isInCart) {
+      Swal.fire({
+        title: "Already in Cart",
+        text: "This product is already in the cart.",
+        icon: "info",
+      });
+    } else {
+      dispatch(setCartList(product));
+    }
+  };
+
+  const handleRemoveFromWishList = (productId) => {
+    dispatch(removeFromWishList(productId));
   };
 
   const truncateText = (text, maxLength) => {
@@ -26,6 +45,18 @@ const CustomCard = ({ product, remove }) => {
     }
     return text;
   };
+
+  const calculateDiscountedPrice = (price, discountValue, discountType) => {
+    if (discountType === "Percent") {
+      return price - (price * discountValue) / 100;
+    } else if (discountType === "Exact") {
+      return price - discountValue;
+    } else {
+      return price;
+    }
+  };
+
+  const discountedPrice = calculateDiscountedPrice(product?.Price, product?.DiscountValue, product?.DiscountType);
 
   return (
     <Card style={{border: "5px solid rgb(241, 240, 240)"}} className="border-0">
@@ -47,6 +78,7 @@ const CustomCard = ({ product, remove }) => {
             className="border-0"
             style={{ fontSize: "30px" }}
             type="button"
+            onClick={() => handleRemoveFromWishList(product?.ProductID)}
           >
             <RiDeleteBin6Line />
           </button>
@@ -91,8 +123,11 @@ const CustomCard = ({ product, remove }) => {
         ) : (
           <Card.Title>{product?.Title}</Card.Title>
         )}
-
-        <Card.Text>${product?.Price}</Card.Text>
+        <div className="d-flex gap-2">
+        <Card.Text style={{textDecoration: "line-through"}}>${product?.Price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Card.Text>
+        <Card.Text>${discountedPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Card.Text>
+        </div>
+        
       </Card.Body>
     </Card>
   );

@@ -27,7 +27,7 @@ const FlashSale = () => {
       const data = await productRequest(7);
       store.dispatch(setProductList(data));
     })();
-  }, []);
+  }, [7]);
 
   const products = useSelector((state) => state.product.products);
 

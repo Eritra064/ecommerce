@@ -4,6 +4,7 @@ import CustomCard from "../../../helper/CustomCard";
 import { relatedItemRequest } from "../../../APIRequest/RelatedItem";
 
 const RelatedItem = ({ product }) => {
+  
   const [startIndex, setStartIndex] = useState(0);
   console.log(product);
 
@@ -26,19 +27,24 @@ const RelatedItem = ({ product }) => {
     (item) => item.Title != product.Title
   );
   console.log(relatedProducts);
+
+  const topRelatedProducts = relatedProducts.slice(0, 4);
+  console.log(topRelatedProducts);
   return (
     <div style={{ marginTop: "150px" }}>
       <div className="d-flex align-items-center mb-3">
         <div className="product-top rounded mr-3"></div>
         <p className="text-danger font-weight-bold">Related Items</p>
       </div>
-      <div className="d-flex align-items-center">
-        {relatedProducts.slice(startIndex, startIndex + 4).map((product) => (
-          <div key={product.id} className="col-3 mb-4">
+      
+      <div className="d-flex flex-wrap">
+        {topRelatedProducts.map((product,index) => (
+          <div key={index} className="col-3 mb-4">
             <CustomCard product={product} />
           </div>
         ))}
       </div>
+      
     </div>
   );
 };

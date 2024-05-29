@@ -21,7 +21,7 @@ import { useDispatch } from "react-redux";
 import store from "../../redux/store";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
+import Swal from 'sweetalert2';
 
 function Topbar() {
   const cartList = useSelector((state) => state.product.cartList)
@@ -34,6 +34,27 @@ function Topbar() {
     window.location.reload();
   }
   
+  const handleWishlistClick = (e) => {
+    if (wishList.length === 0) {
+      e.preventDefault();
+      Swal.fire({
+        title: "Empty Wishlist",
+        text: "Your wishlist is currently empty.",
+        icon: "info",
+      });
+    }
+  };
+
+  const handleCartlistClick = (e) => {
+    if (cartList.length === 0) {
+      e.preventDefault();
+      Swal.fire({
+        title: "Empty Cart",
+        text: "There is nothing in the cart",
+        icon: "info",
+      });
+    }
+  };
   
   return (
     <Navbar
@@ -74,11 +95,11 @@ function Topbar() {
             />
           </Form>
           <Nav className="d-flex">
-            <Link style={{textDecoration: "none"}} to="/wishlist"><div><img src={wishlist} />
+            <Link style={{textDecoration: "none"}} to="/wishlist" onClick={handleWishlistClick}><div><img src={wishlist} />
             {wishList.length>0 && <sup className="superscript">{wishList.length}</sup> }</div>
             </Link>
             
-            <Link style={{textDecoration: "none"}} to="/cart"><div><img src={cart} />
+            <Link style={{textDecoration: "none"}} to="/cart" onClick={handleCartlistClick}><div><img src={cart} />
             {cartList.length>0 && <sup className="superscript">{cartList.length}</sup>}</div>
             </Link>
           </Nav>
