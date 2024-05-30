@@ -9,6 +9,8 @@ import { RiComputerLine } from "react-icons/ri";
 import { BsSmartwatch } from "react-icons/bs";
 import { MdOutlineHeadphones } from "react-icons/md";
 import { SiFacebookgaming } from "react-icons/si";
+import { MdDiscount } from "react-icons/md";
+import { BsCart4 } from "react-icons/bs";
 import { CategoryListRequest } from "../../../APIRequest/Category";
 import { Link } from "react-router-dom";
 
@@ -46,6 +48,14 @@ const Categories = () => {
       icon: SiFacebookgaming,
       text: "Gaming",
     },
+    {
+      icon: MdDiscount,
+      text: "Flash Sales"
+    },
+    {
+      icon: BsCart4,
+      text: "Best Selling Products"
+    }
   ];
 
   const findIcon = (categoryName) => {

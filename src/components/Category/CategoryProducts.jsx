@@ -12,7 +12,6 @@ const CategoryProducts = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 8;
-  
 
   useEffect(() => {
     (async () => {
@@ -29,11 +28,12 @@ const CategoryProducts = () => {
   console.log(categories);
   console.log(products);
 
-  
-
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+  const currentProducts = products.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
 
   const totalPages = Math.ceil(products.length / productsPerPage);
 
@@ -44,12 +44,17 @@ const CategoryProducts = () => {
   return (
     <div className="mt-5 container mx-auto mb-5">
       <div className="d-flex gap-2 mb-5">
-        
-          <Link style={{ textDecoration: "none", color: "black" }} to="/">Home</Link>/
-          <Link className="font-weight-bold" style={{ textDecoration: "none", color: "black" }} to={`/category/${categoryId}`}>
-            {category?.CategoryName}
-          </Link>
-        
+        <Link style={{ textDecoration: "none", color: "black" }} to="/">
+          Home
+        </Link>
+        /
+        <Link
+          className="font-weight-bold"
+          style={{ textDecoration: "none", color: "black" }}
+          to={`/category/${categoryId}`}
+        >
+          {category?.CategoryName}
+        </Link>
       </div>
       <div className="d-flex flex-wrap col-12">
         {currentProducts.map((product, index) => (
@@ -66,6 +71,8 @@ const CategoryProducts = () => {
           onPageChange={handlePageChange}
         />
       )}
+
+      
     </div>
   );
 };

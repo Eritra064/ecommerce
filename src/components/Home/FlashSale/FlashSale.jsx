@@ -70,11 +70,13 @@ const FlashSale = () => {
           </button>
         </div>
       </div>
+      <div className="d-flex flex-column flex-lg-row align-items-center">
       {products.slice(startIndex, startIndex + 4).map((product, index) => (
-        <div key={product.id} className="col-3 mb-4">
-          <CustomCard product={product} />
+        <div key={product.id} className="col-12 col-md-3 mb-4">
+          <CustomCard key={product?.ProductID} product={product} />
         </div>
       ))}
+      </div>
     </div>
   );
 };

@@ -37,9 +37,9 @@ const RelatedItem = ({ product }) => {
         <p className="text-danger font-weight-bold">Related Items</p>
       </div>
       
-      <div className="d-flex flex-wrap">
+      <div className="d-flex flex-wrap flex-md-row">
         {topRelatedProducts.map((product,index) => (
-          <div key={index} className="col-3 mb-4">
+          <div key={index} className="col-12 col-md-6 col-lg-3 mb-4">
             <CustomCard product={product} />
           </div>
         ))}

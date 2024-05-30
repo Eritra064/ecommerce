@@ -1,10 +1,13 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "../../assets/css/cartlist.css";
 import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { useState } from "react";
+import { removeFromCartList } from "../../redux/state-slice/productSlice";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 const CartList = () => {
+  const dispatch = useDispatch();
   const cartList = useSelector((state) => state.product.cartList);
   console.log(cartList);
   const URL = "http://192.168.114.231:4001/"
@@ -29,6 +32,10 @@ const CartList = () => {
       [productId]: prevQuantities[productId] > 1 ? prevQuantities[productId] - 1 : 1
     }));
   };
+
+  const handleremoveFromCartList = (productId) => {
+    dispatch(removeFromCartList(productId));
+  }
   return (
     <div className="container mx-auto mt-5 mb-5">
       <div className="d-flex flex-column gap-3">
@@ -41,6 +48,9 @@ const CartList = () => {
           </div>
           <div className="w-25 d-flex justify-content-center align-items-center">
             <p>Quantity</p>
+          </div>
+          <div className="w-25 d-flex justify-content-center align-items-center">
+            <p>Subtotal</p>
           </div>
           <div className="w-25 d-flex justify-content-center align-items-center">
             <p>Subtotal</p>
@@ -75,6 +85,9 @@ const CartList = () => {
             </div>
             <div className="w-25 d-flex justify-content-center align-items-center">
               <p>{(parseFloat(product?.Price) * quantities[product.id])}</p>
+            </div>
+            <div className="w-25 d-flex justify-content-center align-items-center">
+              <button className="bg-white border-0" onClick={() => handleremoveFromCartList(product?.ProductID)}><RiDeleteBin6Line style={{fontSize: "20px"}} /></button>
             </div>
           </div>
         ))}
