@@ -38,6 +38,10 @@ const routeList = [
     {
         url: "/category/:categoryId",
         component: lazy(() => import('../components/Category/CategoryProducts'))
+    },
+    {
+        url: "/myaccount",
+        component: lazy(() =>import('../components/MyAccount/MyAccount'))
     }
 
 ]

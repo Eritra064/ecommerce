@@ -28,8 +28,7 @@ const RelatedItem = ({ product }) => {
   );
   console.log(relatedProducts);
 
-  const topRelatedProducts = relatedProducts.slice(0, 4);
-  console.log(topRelatedProducts);
+  
   return (
     <div style={{ marginTop: "150px" }}>
       <div className="d-flex align-items-center mb-3">
@@ -38,7 +37,7 @@ const RelatedItem = ({ product }) => {
       </div>
       
       <div className="d-flex flex-wrap flex-md-row">
-        {topRelatedProducts.map((product,index) => (
+        {products.slice(0, 4).map((product,index) => (
           <div key={index} className="col-12 col-md-6 col-lg-3 mb-4">
             <CustomCard product={product} />
           </div>

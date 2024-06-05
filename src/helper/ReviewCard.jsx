@@ -1,33 +1,33 @@
+import Rating from "react-rating";
 import { FaStar } from "react-icons/fa";
-const ReviewCard = ({name, description}) => {
+import { CiStar } from "react-icons/ci";
+import { useState } from "react";
+
+const ReviewCard = ({ name, description, individualRating }) => {
+  const [rating, setRating] = useState(0);
+
   return (
     <div className="rounded shadow d-flex flex-column container mx-auto pt-3">
       <div className="d-flex justify-content-between align-items-center">
         <div>
-          <p className="font-weight-bold" style={{fontSize: "20px"}}>{name}</p>
+          <p className="font-weight-bold" style={{ fontSize: "20px" }}>
+            {name}
+          </p>
         </div>
-        <div className="d-flex justify-content-center align-items-center gap-2">
-          <p>
-            <FaStar style={{ color: "#FFAD33" }} />
-          </p>
-          <p>
-            <FaStar style={{ color: "#FFAD33" }} />
-          </p>
-          <p>
-            <FaStar style={{ color: "#FFAD33" }} />
-          </p>
-          <p>
-            <FaStar style={{ color: "#FFAD33" }} />
-          </p>
-          <p>
-            <FaStar style={{ color: "rgb(241, 240, 240)" }} />
-          </p>
+        <div>
+          <Rating
+            readonly
+            style={{ maxWidth: 180, fontSize: "20px" }}
+            value={rating}
+            onChange={setRating}
+            initialRating={individualRating}
+            emptySymbol={<CiStar />}
+            fullSymbol={<FaStar style={{ color: "#FFBF00" }} />}
+          />
         </div>
       </div>
       <div>
-        <p>
-          {description}
-        </p>
+        <p>{description}</p>
       </div>
     </div>
   );

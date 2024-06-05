@@ -1,0 +1,8 @@
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  background-color: #F5F5F5;
+  color: black;
+  padding: 10px;
+  border: none;
+}

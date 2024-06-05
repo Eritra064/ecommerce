@@ -110,7 +110,7 @@ function Topbar() {
             </Dropdown.Toggle>
       
             <Dropdown.Menu classname="dropdown-background">
-              <Dropdown.Item href="#/action-1"><RxPerson className="mr-2" />Manage My Account</Dropdown.Item>
+              <Dropdown.Item href="/myaccount"><RxPerson className="mr-2" />Manage My Account</Dropdown.Item>
               <Dropdown.Item href="#/action-2"><FiShoppingBag className="mr-2"/>My Order</Dropdown.Item>
               <Dropdown.Item href="#/action-3"><MdOutlineCancel className="mr-2"/>My Cancellations</Dropdown.Item>
               <Dropdown.Item href="#/action-3"><FaRegStar className="mr-2"/>My Reviews</Dropdown.Item>

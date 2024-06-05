@@ -8,6 +8,7 @@ const initialState = {
   relatedItems: [],
   categoryProducts: [],
   allProducts: [],
+  updatedProduct: []
 };
 
 const productSlice = createSlice({
@@ -49,6 +50,16 @@ const productSlice = createSlice({
         (item) => item.ProductID !== action.payload
       );
     },
+
+    setCartProductList: (state, action) => {
+      const cartProduct = {
+        id: action.payload,
+        product: action.payload,
+        quantity: action.payload,
+        subTotal: action.payload
+      }
+      state.updatedProduct.push(cartProduct);
+    }
   },
 });
 
@@ -61,6 +72,7 @@ export const {
   setCategoryProduct,
   setAllProducts,
   removeFromWishList,
-  removeFromCartList
+  removeFromCartList,
+  setCartProductList
 } = productSlice.actions;
 export default productSlice.reducer;
