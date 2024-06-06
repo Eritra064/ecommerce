@@ -4,20 +4,24 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useSelector, useDispatch } from "react-redux";
 import "../../assets/css/cartlist.css";
-import { removeFromCartList } from "../../redux/state-slice/productSlice";
-import { setCartProductList } from "../../redux/state-slice/productSlice";
+import { removeFromCartList, updateProductQuantities } from "../../redux/state-slice/productSlice";
 
 const IndividualProduct = ({ product }) => {
   const dispatch = useDispatch();
-  const [quantities, setQuantities] = useState(1);
+  const [quantities, setQuantities] = useState(product?.quantities);
+
 
   const increment = () => {
-    setQuantities((prevQuantity) => prevQuantity + 1);
+    const newQuantity = quantities + 1;
+    setQuantities(newQuantity);
+    dispatch(updateProductQuantities({ productId: product?.ProductID, quantities: newQuantity }));
   };
 
   const decrement = () => {
     if (quantities > 1) {
-      setQuantities((prevQuantity) => prevQuantity - 1);
+      const newQuantity = quantities - 1;
+      setQuantities(newQuantity);
+      dispatch(updateProductQuantities({ productId: product?.ProductID, quantities: newQuantity }));
     }
   };
   
@@ -33,23 +37,8 @@ const IndividualProduct = ({ product }) => {
     maximumFractionDigits: 2,
   });
 
-  const calculateDiscountedPrice = (price, discountValue, discountType) => {
-    if (discountType === "Percent") {
-      return price - (price * discountValue) / 100;
-    } else if (discountType === "Exact") {
-      return price - discountValue;
-    } else {
-      return price;
-    }
-  };
 
-  const discountedPrice = calculateDiscountedPrice(
-    product?.Price,
-    product?.DiscountValue,
-    product?.DiscountType
-  );
-
-  const subTotal = discountedPrice * quantities;
+  
   return (
     <div>
     <div
@@ -65,7 +54,7 @@ const IndividualProduct = ({ product }) => {
         </div>
       </div>
       <div className="w-25 d-flex justify-content-center align-items-center">
-        <p>${numberFormatter.format(discountedPrice)}</p>
+        <p>${numberFormatter.format(product?.initialPrice)}</p>
       </div>
       <div className="w-25 d-flex justify-content-center align-items-center">
         <div className="d-flex border rounded justify-content-center align-items-center">
@@ -85,7 +74,7 @@ const IndividualProduct = ({ product }) => {
         </div>
       </div>
       <div className="w-25 d-flex justify-content-center align-items-center">
-        <p>${numberFormatter.format(subTotal)}</p>
+        <p>${numberFormatter.format(product?.subTotal)}</p>
       </div>
       <div className="w-25 d-flex justify-content-center align-items-center">
         <button

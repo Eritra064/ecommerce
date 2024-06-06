@@ -8,7 +8,16 @@ const initialState = {
   relatedItems: [],
   categoryProducts: [],
   allProducts: [],
-  updatedProduct: []
+};
+
+const calculateDiscountedPrice = (price, discountValue, discountType) => {
+  if (discountType === "Percent") {
+    return price - (price * discountValue) / 100;
+  } else if (discountType === "Exact") {
+    return price - discountValue;
+  } else {
+    return price;
+  }
 };
 
 const productSlice = createSlice({
@@ -20,7 +29,33 @@ const productSlice = createSlice({
     },
 
     setCartList: (state, action) => {
-      state.cartList.push(action.payload);
+      const product = action.payload;
+      const discountedPrice = calculateDiscountedPrice(
+        product.Price,
+        product.DiscountValue,
+        product.DiscountType
+      );
+      state.cartList.push({
+        ...product,
+        quantities: 1,
+        initialPrice: discountedPrice,
+        subTotal: discountedPrice,
+      });
+    },
+
+    updateProductQuantities: (state, action) => {
+      const { productId, quantities } = action.payload;
+      const product = state.cartList.find(
+        (product) => product.ProductID === productId
+      );
+      if (product) {
+        product.quantities = quantities;
+        product.subTotal = calculateDiscountedPrice(
+          product.Price,
+          product.DiscountValue,
+          product.DiscountType
+        ) * quantities;
+      }
     },
 
     setWishList: (state, action) => {
@@ -51,15 +86,6 @@ const productSlice = createSlice({
       );
     },
 
-    setCartProductList: (state, action) => {
-      const cartProduct = {
-        id: action.payload,
-        product: action.payload,
-        quantity: action.payload,
-        subTotal: action.payload
-      }
-      state.updatedProduct.push(cartProduct);
-    }
   },
 });
 
@@ -73,6 +99,6 @@ export const {
   setAllProducts,
   removeFromWishList,
   removeFromCartList,
-  setCartProductList
+  updateProductQuantities
 } = productSlice.actions;
 export default productSlice.reducer;

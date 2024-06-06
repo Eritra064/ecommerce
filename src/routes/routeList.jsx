@@ -42,6 +42,10 @@ const routeList = [
     {
         url: "/myaccount",
         component: lazy(() =>import('../components/MyAccount/MyAccount'))
+    },
+    {
+        url: "/billing",
+        component: lazy(() => import('../components/BillingDetails/BillingDetails'))
     }
 
 ]

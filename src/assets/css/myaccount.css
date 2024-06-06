@@ -1,8 +1,13 @@
 input[type="text"],
 input[type="email"],
+input[type="tel"],
 input[type="password"] {
   background-color: #F5F5F5;
   color: black;
   padding: 10px;
   border: none;
+}
+
+.box{
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
